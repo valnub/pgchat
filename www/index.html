@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>PGDay EU 2017 Chat App</title>
+  <link rel="stylesheet" href="css/framework7.ios.min.css">
+  <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+  <div id="app">
+    <!-- Statusbar -->
+    <!-- NOTE: You may need to comment out the next line depending on what device you're running on and see the app title cut off -->
+    <f7-statusbar></f7-statusbar>
+
+    <!-- Main Views -->
+    <f7-views>
+      <f7-view id="main-view" navbar-through :dynamic-navbar="true" main>
+
+        <!-- Navbar -->
+        <f7-navbar>
+          <f7-nav-center sliding>PGDay EU 2017</f7-nav-center>
+        </f7-navbar>
+
+        <!-- Pages -->
+        <f7-pages>
+          <f7-page>
+            <f7-block-title>Framework7-Vue Demo Chat App</f7-block-title>
+            <f7-list>
+              <f7-list-item>
+                <f7-input @keyup.enter="enterChat" type="text" placeholder="Your name" v-model:value="name" />
+              </f7-list-item>
+              <f7-list-button v-on:click="enterChat">Enter chat</f7-list-button>
+            </f7-list>
+          </f7-page>
+        </f7-pages>
+      </f7-view>
+    </f7-views>
+  </div>
+
+  <!-- Chat Page Template -->
+  <template id="page-chat">
+    <f7-page>
+      <f7-navbar title="Chat" back-link="Back" sliding></f7-navbar>
+      <f7-messages>
+        <f7-message v-for="msg in msgs" :name="msg.name" :text="msg.text" :type="msg.type"></f7-message>
+      </f7-messages>
+      <f7-messagebar placeholder="Message" send-link="Send" v-on:submit="onSend"></f7-messagebar>
+    </f7-page>
+  </template>
+
+  <script src="cordova.js"></script>
+  <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.0.11.min.js"></script>
+  <script src="js/lib/framework7.min.js"></script>
+  <script src="js/lib/vue.min.js"></script>
+  <script src="js/lib/framework7-vue.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
