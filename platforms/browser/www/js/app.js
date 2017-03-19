@@ -97,6 +97,7 @@
                  */
                 enterChat: function () {
                     if (this.name.trim().length === 0) return false;
+                    this.msgs.length = 0;
                     this.$f7.mainView.router.load({url: '/chat/'});
                     initPubNub();
                 }
