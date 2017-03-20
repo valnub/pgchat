@@ -96,7 +96,10 @@
                  * Gets called when user name was entered and user enters chat
                  */
                 enterChat: function () {
-                    if (this.name.trim().length === 0) return false;
+                    if (this.name.trim().length === 0) {
+                        alert('Please enter your name');
+                        return false;
+                    }
                     this.msgs.length = 0;
                     this.$f7.mainView.router.load({url: '/chat/'});
                     initPubNub();
@@ -105,6 +108,7 @@
             framework7: {
                 root: '#app',
                 // material: true, // Remember to change css paths to ios/material theme!
+                material: Framework7.prototype.device.android ? true : false,
                 // Mapping of routes -> templates
                 routes: [{
                     path: '/chat/',
@@ -116,6 +120,11 @@
 
     // Wait until device is ready and then init the app
     document.addEventListener('DOMContentLoaded', function () {
+        if (Framework7.prototype.device.android) {
+            Dom7('.view.navbar-through').removeClass('navbar-through').addClass('navbar-fixed');
+            Dom7('.view .navbar').prependTo('.view .page');
+        }
+
         initVue();
     }, false);
 

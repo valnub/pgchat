@@ -6,9 +6,34 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <title>PGDay EU 2017 Chat App</title>
-  <link rel="stylesheet" href="css/framework7.ios.min.css">
-  <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+  
+  <!-- Scripts -->
+  <script src="cordova.js"></script>
+  <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.0.11.min.js"></script>
+  <script src="js/lib/framework7.min.js"></script>
+  <script src="js/lib/vue.min.js"></script>
+  <script src="js/lib/framework7-vue.min.js"></script>
+  <script src="js/app.js"></script>
+  <!-- End scripts -->
+  
+  <!-- Styles -->
+  <script>
+      if (Framework7.prototype.device.android) {
+          document.write(
+            '<link rel="stylesheet" href="css/framework7.material.min.css">' +
+            '<link rel="stylesheet" href="css/framework7.material.colors.min.css">'
+          );
+      }
+      else {
+        document.write(
+          '<link rel="stylesheet" href="css/framework7.ios.min.css">' +
+          '<link rel="stylesheet" href="css/framework7.ios.colors.min.css">'
+        );
+      }
+  </script>
   <link rel="stylesheet" href="css/app.css">
+  <!-- End styles -->
+
 </head>
 
 <body>
@@ -22,7 +47,7 @@
       <f7-view id="main-view" navbar-through :dynamic-navbar="true" main>
 
         <!-- Navbar -->
-        <f7-navbar>
+        <f7-navbar back-link="Back" sliding>
           <f7-nav-center sliding>PGDay EU 2017</f7-nav-center>
         </f7-navbar>
 
@@ -45,7 +70,6 @@
   <!-- Chat Page Template -->
   <template id="page-chat">
     <f7-page>
-      <f7-navbar title="Chat" back-link="Back" sliding></f7-navbar>
       <f7-messages>
         <f7-message v-for="msg in msgs" :name="msg.name" :text="msg.text" :type="msg.type"></f7-message>
       </f7-messages>
@@ -53,12 +77,6 @@
     </f7-page>
   </template>
 
-  <script src="cordova.js"></script>
-  <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.0.11.min.js"></script>
-  <script src="js/lib/framework7.min.js"></script>
-  <script src="js/lib/vue.min.js"></script>
-  <script src="js/lib/framework7-vue.min.js"></script>
-  <script src="js/app.js"></script>
 </body>
 
 </html>
